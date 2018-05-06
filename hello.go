@@ -1,8 +1,11 @@
-package main
+func Max(num1, num2 int) int {
 
-import "fmt"
+	var result int
 
-func main() {
-	fmt.Printf("hello word")
-	fmt.Printf("goodbye word")
+	if num1 > num2 {
+		result = num1
+	} else {
+		result = num2
+	}
+	return result
 }
