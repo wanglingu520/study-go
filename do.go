@@ -2,18 +2,29 @@ package main
 
 import "fmt"
 
-func Factorial(n uint64) (result uint64) {
-	if n > 0 {
-		result := n * Factorial(n-1)
-		return result
-	}
-	return 1
+type Phone interface {
+	call()
 }
 
-func main() {
-	var i uint64 = 15
-	//var i int =15
+type Nokiaphone struct {
+}
 
-	fmt.Printf("%d ! = %d\n", i, Factorial(i))
-	//Factorial(uint64(i))此处因为i的定义风格，与函数表达式相违背，在函数上需要进行强制转换
+func (nokiaphone Nokiaphone) call() {
+	fmt.Println("Nokia call")
+}
+
+type Iphone struct {
+}
+
+func (iphone Iphone) call() {
+	fmt.Println("Iphone call")
+}
+func main() {
+	var phone Phone
+
+	phone = new(Nokiaphone)
+	phone.call()
+
+	phone = new(Iphone)
+	phone.call()
 }
