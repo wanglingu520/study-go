@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 	var numbers []int
 	PrintSlice(numbers)
@@ -10,4 +12,8 @@ func main() {
 	number1 := make([]int, len(numbers), (cap(numbers))*2)
 	copy(number1, numbers)
 	PrintSlice(numbers)
+}
+
+func PrintSlice(x []int) {
+	fmt.Printf("len = %d cap = %d slice = %d\n", len(x), cap(x), x)
 }
