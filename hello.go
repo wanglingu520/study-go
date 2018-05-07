@@ -2,9 +2,12 @@ package main
 
 import "fmt"
 
+func time(a int) int {
+	return (a * 12)
+}
+
 func main() {
-	const boilingF = 212.0
-	var f = boilingF
-	var c = (f - 32) * 5 / 9
-	fmt.Printf("boiling point = %g°F or %g°C\n", f, c)
+	const manAge, womanAge = 81, 88
+	fmt.Printf("%dN = %dD\n", manAge, time(manAge))
+	fmt.Printf("%dN = %dD\n", womanAge, time(womanAge))
 }
