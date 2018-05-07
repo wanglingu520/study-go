@@ -1,30 +1,45 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type Phone interface {
-	call()
+type DivideError struct {
+	dividee int
+	divider int
 }
 
-type Nokiaphone struct {
+func (de *DivideError) Error() string {
+	strFormat := `
+    Cannot proceed, the divider is zero.
+    dividee: %d
+    divider: 0
+`
+	return fmt.Sprintf(strFormat, de.dividee)
 }
 
-func (nokiaphone Nokiaphone) call() {
-	fmt.Println("Nokia call")
+func Divide(varDividee int, varDivider int) (result int, errorMsg string) {
+	if varDivider == 0 {
+		dData := DivideError{
+			dividee: varDividee,
+			divider: varDivider,
+		}
+		errorMsg = dData.Error()
+		return
+	} else {
+		return varDividee / varDivider, ""
+	}
+
 }
 
-type Iphone struct {
-}
-
-func (iphone Iphone) call() {
-	fmt.Println("Iphone call")
-}
 func main() {
-	var phone Phone
 
-	phone = new(Nokiaphone)
-	phone.call()
+	if result, errorMsg := Divide(100, 10); errorMsg == "" {
+		fmt.Println("100/10 = ", result)
+	}
 
-	phone = new(Iphone)
-	phone.call()
+	if _, errorMsg := Divide(100, 0); errorMsg != "" {
+		fmt.Println("errorMsg is: ", errorMsg)
+	}
+
 }
