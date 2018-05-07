@@ -2,30 +2,9 @@ package main
 
 import "fmt"
 
-type Man interface {
-	work()
-}
-
-type China struct {
-}
-
-func (Chinese China) work() {
-	fmt.Println("Hard work")
-}
-
-type Japan struct {
-}
-
-func (Japanese Japan) work() {
-	fmt.Println("Smart work")
-}
-
 func main() {
-	var American Man
-
-	American = new(China)
-	American.work()
-
-	American = new(Japan)
-	American.work()
+	const boilingF = 212.0
+	var f = boilingF
+	var c = (f - 32) * 5 / 9
+	fmt.Printf("boiling point = %g°F or %g°C\n", f, c)
 }
