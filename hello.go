@@ -2,19 +2,30 @@ package main
 
 import "fmt"
 
+type Man interface {
+	work()
+}
+
+type China struct {
+}
+
+func (Chinese China) work() {
+	fmt.Println("Hard work")
+}
+
+type Japan struct {
+}
+
+func (Japanese Japan) work() {
+	fmt.Println("Smart work")
+}
+
 func main() {
-	countryCapitalMap := map[string]string{"France": "Paris", "Japan": "Tokyo",
-		"China": "Perking"}
+	var American Man
 
-	for country := range countryCapitalMap {
-		fmt.Println(country, "Cap", countryCapitalMap[country])
-	}
+	American = new(China)
+	American.work()
 
-	delete(countryCapitalMap, "France")
-
-	fmt.Println("F Gone")
-
-	for country := range countryCapitalMap {
-		fmt.Println(country, "Cap", countryCapitalMap[country])
-	}
+	American = new(Japan)
+	American.work()
 }
