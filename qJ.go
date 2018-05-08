@@ -1,19 +1,35 @@
 package main
 
-import "fmt"
+import (
+	"io"
+	"log"
+	"net"
+	"time"
+)
 
 func main() {
-	var b int
-	var a int
-
-	for a = 1; a < 10; a++ {
-		for b = 1; b < 10; b++ {
-			if a <= b {
-				fmt.Printf("%d * %d = %d\n", a, b, a*b)
-			}
-
-		}
-
+	listener, err := net.Listen("tcp", "localhost:8000")
+	if err != nil {
+		log.Fatal(err)
 	}
-	return
+
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			log.Print(err)
+			continue
+		}
+		handleConn(conn)
+	}
+}
+
+func handleConn(c net.Conn) {
+	defer c.Close()
+	for {
+		_, err := io.WriteString(c, time.Now().Format("15:04:05\n"))
+		if err != nil {
+			return
+		}
+		time.Sleep(1 * time.Second)
+	}
 }
