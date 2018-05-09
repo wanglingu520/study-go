@@ -1,17 +1,29 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 func main() {
-	var a, b float64 = 3, 4
+	var a int = 7
+	var b int = 8
 
-	fmt.Println(hypot(a, b))
+	fmt.Println(add(a, b), sub(a, b), first(a, b), zero(a, b))
+	fmt.Println(add(sub(a, b), b))
 
 }
 
-func hypot(x, y float64) float64 {
-	return math.Sqrt(x*x + y*y)
+func add(x int, y int) int {
+	return x + y
+}
+
+func sub(x, y int) (z int) {
+	z = x - y
+	return
+}
+
+func first(x int, _ int) int {
+	return x
+}
+
+func zero(int, int) int {
+	return 0
 }
