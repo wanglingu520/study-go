@@ -2,29 +2,17 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"os"
 )
 
 func main() {
-	go spinner(100 * time.Millisecond)
-	const n = 45
-	fibN := fib(n)
-	fmt.Printf("\rFibonacci(%d) = %d\n", n, fibN)
-}
+	var s string = "hi"
+	var sep string
 
-func spinner(delay time.Duration) {
-	for {
-		for _, r := range `-\|/` {
-			fmt.Printf("\r%c", r)
-
-			time.Sleep(delay)
-		}
+	for i := 1; i < len(os.Args); i++ {
+		s += sep + os.Args[i]
+		sep = ""
+		// sep为空字符串，如何让其显示添加字符,给s赋值，如添加hi
 	}
-}
-
-func fib(x int) int {
-	if x < 2 {
-		return x
-	}
-	return fib(x-1) + fib(x-2)
+	fmt.Println(s)
 }
