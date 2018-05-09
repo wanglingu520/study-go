@@ -1,13 +1,30 @@
 package main
 
-import "fmt"
-
-func time(a int) int {
-	return (a * 12)
-}
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-	const manAge, womanAge = 81, 88
-	fmt.Printf("%dN = %dD\n", manAge, time(manAge))
-	fmt.Printf("%dN = %dD\n", womanAge, time(womanAge))
+	go spinner(100 * time.Millisecond)
+	const n = 45
+	fibN := fib(n)
+	fmt.Printf("\rFibonacci(%d) = %d\n", n, fibN)
+}
+
+func spinner(delay time.Duration) {
+	for {
+		for _, r := range `-\|/` {
+			fmt.Printf("\r%c", r)
+
+			time.Sleep(delay)
+		}
+	}
+}
+
+func fib(x int) int {
+	if x < 2 {
+		return x
+	}
+	return fib(x-1) + fib(x-2)
 }
