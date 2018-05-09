@@ -2,10 +2,16 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
+	"math"
 )
 
 func main() {
-	fmt.Println("hi", strings.Join(os.Args[1:], " "))
+	var a, b float64 = 3, 4
+
+	fmt.Println(hypot(a, b))
+
+}
+
+func hypot(x, y float64) float64 {
+	return math.Sqrt(x*x + y*y)
 }
