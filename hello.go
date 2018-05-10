@@ -21,4 +21,5 @@ func main() {
 	var a = Point{7, 6}
 	var b = Point{5, 4}
 	fmt.Printf("p to q distance = %f\n", Distance(a, b))
+	fmt.Println(a.Distance(b))
 }
