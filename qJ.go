@@ -1,23 +1,38 @@
 package main
 
 import (
-	"io"
-	"log"
-	"net"
-	"os"
+	"fmt"
 )
 
-func main() {
-	conn, err := net.Dial("tcp", "localhost:8000")
-	if err != nil {
-		log.Fatal(err)
+type (
+	subject struct {
+		a int
+		b int
+		c int
 	}
-	defer conn.Close()
-	mustCopy(os.Stdout, conn)
+)
+
+func (o subject) getGrade(marks int) string {
+	switch {
+	case marks >= o.a:
+		return "A"
+	case marks < o.a && marks >= o.b:
+		return "B"
+	case marks < o.b && marks >= o.c:
+		return "C"
+	default:
+		return "D"
+	}
 }
 
-func mustCopy(dst io.Writer, src io.Reader) {
-	if _, err := io.Copy(dst, src); err != nil {
-		log.Fatal(err)
-	}
+func main() {
+	var marks int = 70
+	subjectChineseType := subject{80, 70, 50}
+	grade := subjectChineseType.getGrade(marks)
+	fmt.Println("grade is", grade)
+
+	var subjectEnglishType subject = subject{90, 80, 70}
+	grade = subjectEnglishType.getGrade(marks)
+	fmt.Println("grade is", grade)
+
 }
