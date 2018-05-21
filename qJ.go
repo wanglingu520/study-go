@@ -2,37 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	"time"
 )
-
-type (
-	subject struct {
-		a int
-		b int
-		c int
-	}
-)
-
-func (o subject) getGrade(marks int) string {
-	switch {
-	case marks >= o.a:
-		return "A"
-	case marks < o.a && marks >= o.b:
-		return "B"
-	case marks < o.b && marks >= o.c:
-		return "C"
-	default:
-		return "D"
-	}
-}
 
 func main() {
-	var marks int = 70
-	subjectChineseType := subject{80, 70, 50}
-	grade := subjectChineseType.getGrade(marks)
-	fmt.Println("grade is", grade)
-
-	var subjectEnglishType subject = subject{90, 80, 70}
-	grade = subjectEnglishType.getGrade(marks)
-	fmt.Println("grade is", grade)
-
+	fmt.Println("Please	visit	http://192.168.1.2:8080/")
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		s := fmt.Sprintf("你好,	世界!	--	Time:	%s", time.Now().String())
+		fmt.Fprintf(w, "%v\n", s)
+		log.Printf("%v\n", s)
+	})
+	if err := http.ListenAndServe(":12345", nil); err != nil {
+		log.Fatal("ListenAndServe:	", err)
+	}
 }
